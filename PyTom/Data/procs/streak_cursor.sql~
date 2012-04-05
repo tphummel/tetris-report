@@ -1,0 +1,19 @@
+SELECT p.playerid, 
+get_player_name(p.playerid, 'nick') as nm,
+get_location_name(m.location, '') as loc,
+m.matchid, m.matchdate, p.lines, p.time, p.wrank, p.erank,
+get_numplayers_inmatch(m.matchid) as numplyrs
+FROM tntmatch m, playermatch p
+WHERE p.playerid = 1
+-- and m.matchdate = '2004-05-16'
+and get_numplayers_inmatch(m.matchid) = 4
+AND m.matchid = p.matchid
+ORDER BY p.playerid, m.matchdate asc, m.matchid asc;
+
+SELECT m.matchid, 
+get_location_name(m.location, '') as loc,
+m.matchdate, 
+get_numplayers_inmatch(m.matchid) as numplyrs
+FROM tntmatch m
+WHERE location = 2
+ORDER BY m.matchdate asc, m.matchid asc;
